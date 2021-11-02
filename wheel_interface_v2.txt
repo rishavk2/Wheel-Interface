@@ -45,7 +45,6 @@ void rotary3() { // 5 input rotary: D17-D21
 // checks if on first loop, if so will run no matter what.
 // afterwards only runs if new read is different from previous read
 void switch1() { // D2
-  Serial.println(floop);
   if (floop==0) { // run no matter what on first execution
     if (digitalRead(2)==LOW) {
       // do this
