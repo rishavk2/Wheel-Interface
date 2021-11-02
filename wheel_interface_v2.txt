@@ -4,10 +4,11 @@ int floop=0; // has first loop completed
 
 // check which input low, does task associated to input
 void rotary1() { // 4 input rotary: D5, D6, D11, D12
+    
     if (digitalRead(5) == LOW) {
-      // do this
-    } else if (digitalRead(5)==LOW) {
-      // do this
+      Serial.println("input 1"); // test code
+    } else if (digitalRead(6)==LOW) {
+      Serial.println("input 2"); // test code
     } else if (digitalRead(11)==LOW) {
       // do this
     } else if (digitalRead(12)==LOW) {
@@ -44,7 +45,7 @@ void rotary3() { // 5 input rotary: D17-D21
 // checks if on first loop, if so will run no matter what.
 // afterwards only runs if new read is different from previous read
 void switch1() { // D2
-  
+  Serial.println(floop);
   if (floop==0) { // run no matter what on first execution
     if (digitalRead(2)==LOW) {
       // do this
@@ -137,10 +138,9 @@ void loop() {
   digitalRead(16), digitalRead(17), digitalRead(18), digitalRead(19), digitalRead(20), digitalRead(21)};
 
   // calls corresponding function for input if low
-  for (int i=0; i<=17; i++) { // runs through all 17 inputs
-    if (i==2 || i==4) { // always call switch1, switch2
-      fn[i]();
-    } else if (inputArray[i] == LOW) { // read is low, call function
+  for (int i=0; i<=16; i++) { // runs through all 17 inputs
+    
+    if (inputArray[i] == LOW || i==2 || i==4) { // read is low, call function, always call the switches
       fn[i]();
     }
   }
