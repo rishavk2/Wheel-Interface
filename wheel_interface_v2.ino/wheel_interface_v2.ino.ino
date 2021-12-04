@@ -108,19 +108,15 @@ void setup() {
   pinMode(20, INPUT_PULLUP);
   pinMode(21, INPUT_PULLUP);
 
-
-  
-
 }
 
 
 void loop() {
-  // array of inputs
-  int inputArray[] = {digitalRead(2), digitalRead(3), digitalRead(4), digitalRead(5), digitalRead(6), 
-  digitalRead(7), digitalRead(8), digitalRead(9), digitalRead(10), digitalRead(11), digitalRead(12), 
-  digitalRead(13), digitalRead(14), digitalRead(15), digitalRead(16), digitalRead(17), digitalRead(18)
-  digitalRead(19)};
 
+  // calls all functions
+  for (int i=0; i<=19; i++) { // runs through all 17 inputs
+    fn[i]();
+  }
   //  load data into tx buffer
   for (int i=0; i<8; i++){
     txBuffer[i] = sendData[i];
@@ -138,16 +134,6 @@ void loop() {
   // Wait for command to finish executing
   while(can_get_status(&txMsg) == CAN_STATUS_NOT_COMPLETED);
   // Transmit is now complete. Wait a bit and loop
-  
-  
-  // calls corresponding function for input if low
-  for (int i=0; i<=16; i++) { // runs through all 17 inputs
-    
-    if (inputArray[i] == LOW || i==2 || i==4) { // read is low, call function, always call the switches
-      fn[i]();
-    }
-  }
-  floop=1; // first loop has finished
   delay(100); // delay for stability
 
 }
